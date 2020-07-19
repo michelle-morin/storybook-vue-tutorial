@@ -23,6 +23,8 @@ export const taskData = {
 
 const taskTemplate = `<task :task="task" @archiveTask="onArchiveTask" @pinTask="onPinTask"/>`;
 
+const longTitle = `This task's name is absurdly large. In fact, I think if I keep going I might end up with content overflow. What will happen? The star that represents a pinned task could have text overlapping. The text could cut-off abruptly when it reaches the star. I hope not!`;
+
 // default task state
 export const Default = () => ({
   components: { Task },
@@ -59,6 +61,21 @@ export const Archived = () => ({
       default: () => ({
         ...taskData,
         state: "TASK_ARCHIVED"
+      })
+    }
+  },
+  methods: actionsData
+});
+
+// long title state
+export const LongTitle = () => ({
+  components: { Task },
+  template: taskTemplate,
+  props: {
+    task: {
+      default: () => ({
+        ...taskData,
+        title: longTitle
       })
     }
   },
