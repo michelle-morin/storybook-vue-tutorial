@@ -1,10 +1,14 @@
 import { action } from "@storybook/addon-actions";
+import { withKnobs, object } from "@storybook/addon-knobs";
 import Task from "./Task";
+
 export default {
   title: "Task",
+  decorators: [withKnobs],
   // Our exports that end in "Data" are not stories.
   excludeStories: /.*Data$/
 };
+
 export const actionsData = {
   onPinTask: action("onPinTask"),
   onArchiveTask: action("onArchiveTask")
@@ -25,11 +29,12 @@ export const Default = () => ({
   template: taskTemplate,
   props: {
     task: {
-      default: () => taskData
+      default: object("task", { ...taskData })
     }
   },
   methods: actionsData
 });
+
 // pinned task state
 export const Pinned = () => ({
   components: { Task },
@@ -44,6 +49,7 @@ export const Pinned = () => ({
   },
   methods: actionsData
 });
+
 // archived task state
 export const Archived = () => ({
   components: { Task },
